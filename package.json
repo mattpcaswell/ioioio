@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/mattpcaswell/ioioio#readme",
   "dependencies": {
-    "express": "^4.16.2"
+    "express": "^4.16.2",
+    "pixi.js": "^4.6.2"
   }
 }
