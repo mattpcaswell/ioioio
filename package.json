@@ -10,13 +10,13 @@
     "type": "git",
     "url": "git+https://github.com/mattpcaswell/ioioio.git"
   },
-  "keywords": [
-    "io"
-  ],
   "author": "Matt Caswell",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/mattpcaswell/ioioio/issues"
+  },
+  "engines": {
+    "node": "7.10.0"
   },
   "homepage": "https://github.com/mattpcaswell/ioioio#readme",
   "dependencies": {
