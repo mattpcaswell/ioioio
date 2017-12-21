@@ -1,6 +1,10 @@
 console.log("hello world");
-var app = new PIXI.Application(800, 600, { antialias: true });
+var app = new PIXI.Application(window.innerWidth, window.innerHeight, { antialias: true });
 document.body.appendChild(app.view);
+
+window.addEventListener("resize", function() {
+  app.renderer.resize(window.innerWidth, window.innerHeight);
+});
 
 app.stage.interactive = true;
 

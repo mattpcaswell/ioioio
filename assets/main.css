@@ -1,3 +1,4 @@
-p {
-    color: red;
+body {
+    overflow: hidden;
+    margin: 0;
 }
