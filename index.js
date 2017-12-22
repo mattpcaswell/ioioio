@@ -4,8 +4,7 @@ const path = require('path');
 const app = express();
 const port = process.env.PORT || 8080;
 
-app.use('/assets', express.static(path.join(__dirname, 'assets')))
-app.use('/deps', express.static(path.join(__dirname, 'node_modules')))
+app.use('/', express.static(path.join(__dirname, 'dist')))
 
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
 
