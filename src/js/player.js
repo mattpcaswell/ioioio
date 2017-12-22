@@ -6,6 +6,8 @@ class Player extends PIXI.Sprite {
 
         this.vx = 0;
         this.vy = 0;
+        this.height = 32;
+        this.width = 32;
     }
 
     update(delta) {

@@ -1,9 +1,11 @@
 import * as PIXI from 'pixi.js';
 import pixiTiled from 'pixi-tiledmap';
-import Player from './js/player.js';
-import './css/index.css';
-import './textures/cat.png';
 
+import Player from './js/player.js';
+
+import './css/index.css';
+
+import './textures/cat.png';
 import './maps/test-map.tmx';
 import './maps/tiles.png';
 
@@ -29,14 +31,13 @@ PIXI.loader
   .add("src/maps/test-map.tmx")
   .load(setup);
 
-//Define any variables that are used in more than one function
 let player;
-
 function setup() {
+  //Create the tilemap
   var tileMap = new PIXI.extras.TiledMap("src/maps/test-map.tmx");
   app.stage.addChild(tileMap);
 
-  //Create the `player` sprite
+  //Create the player
   player = new Player(resources["src/textures/cat.png"].texture);
   app.stage.addChild(player);
 
