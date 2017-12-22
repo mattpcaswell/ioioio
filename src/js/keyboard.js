@@ -17,7 +17,6 @@ function keyboard(keyCode) {
             key.isDown = true;
             key.isUp = false;
         }
-        event.preventDefault();
     };
 
     //The `upHandler`
@@ -27,7 +26,6 @@ function keyboard(keyCode) {
             key.isDown = false;
             key.isUp = true;
         }
-        event.preventDefault();
     };
 
     //Attach event listeners
