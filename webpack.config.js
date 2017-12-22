@@ -13,6 +13,9 @@ module.exports = {
     }),
     new CleanWebpackPlugin(['dist'])
   ],
+  node: {
+    fs: "empty"
+  },
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist')
@@ -26,7 +29,7 @@ module.exports = {
         ]
       },
       {
-        test: /\.(jpe?g|png|gif)$/i,
+        test: /\.(jpe?g|png|gif|tmx|tsx)$/i,
         loaders: ['file-loader?name=[path][name].[ext]'],
       },
     ]
