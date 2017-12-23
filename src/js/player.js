@@ -1,5 +1,5 @@
 import keyboard from "./keyboard.js";
-import { containsPoint } from "./util";
+import { containsPoint } from "./util.js";
 
 class Player extends PIXI.Sprite {
     constructor(...args) {
