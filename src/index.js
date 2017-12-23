@@ -29,3 +29,7 @@ function setup() {
 
   app.ticker.add(delta => game.update(delta));
 }
+
+
+// TODO: testing. delete this all
+import './js/network.js';
