@@ -1,4 +1,5 @@
 import keyboard from "./keyboard.js";
+import { containsPoint } from "./util";
 
 class Player extends PIXI.Sprite {
     constructor(...args) {
@@ -10,11 +11,17 @@ class Player extends PIXI.Sprite {
         this.width = 32;
     }
 
-    update(delta) {
+    update(delta, tileMap) {
         this.handleKeyboard();
 
         this.x += this.vx;
         this.y += this.vy
+
+        tileMap.layers.collision.children.map((collisionTile) => {
+            if (containsPoint(collisionTile, this.position)) {
+                console.log('hit');
+            }
+        });
     }
 
     handleKeyboard() {

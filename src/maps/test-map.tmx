@@ -3,6 +3,11 @@
  <tileset firstgid="1" name="test-tileset" tilewidth="32" tileheight="32" tilecount="165" columns="15">
   <image source="tiles.png" width="480" height="352"/>
  </tileset>
+ <layer name="collision" width="20" height="20" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYBg4oICEqWketYACA/XNHAWjgFigwDCaP0bB4AYAx6kCAQ==
+  </data>
+ </layer>
  <layer name="Tile Layer 1" width="20" height="20">
   <data encoding="base64" compression="zlib">
    eJzt0+kyl2EAxuFXUZYYJaEYWrQxdgpD0iIm7VFjzT72JUwbSRnZSjjfrhPwHMH/nrm+/r7dcVEUneAk8SRwitMkkkQyKZwhlbTo+KVzlnNkcJ5MLpBFNjlc5BK55AV6+RRwmStc5RqFXOcGN7nFbYooDvRKKKWMciqopIpqarjDXWqpoz7Qa6CRezRxn2Ye8JBHPKaFJ7TSFug9pZ1nPOcFL3nFa97wlg46ecf7QK+LbnropY9+PjDAIEMMM8IoY4HeOBNMMsU0M8wyxzwLfGSRJZYDvU985gtf+cYKq3xnjR+s85NfbAR6m/xmi2122GWPP/xln38ccMhRoBcXxf4R+0fsH8ftP1U+Ugk=

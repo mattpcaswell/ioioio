@@ -31,20 +31,20 @@ PIXI.loader
   .add("src/maps/test-map.tmx")
   .load(setup);
 
-let player;
+let player, tileMap;
 function setup() {
   //Create the tilemap
-  var tileMap = new PIXI.extras.TiledMap("src/maps/test-map.tmx");
+  tileMap = new PIXI.extras.TiledMap("src/maps/test-map.tmx");
   app.stage.addChild(tileMap);
 
   //Create the player
   player = new Player(resources["src/textures/cat.png"].texture);
-  app.stage.addChild(player);
+  tileMap.addChild(player);
 
   //Start the game loop
   app.ticker.add(delta => gameLoop(delta));
 }
 
 function gameLoop(delta){
-  player.update(delta);
+  player.update(delta, tileMap);
 }
