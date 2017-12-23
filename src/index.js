@@ -1,20 +1,10 @@
 import * as PIXI from 'pixi.js';
-import pixiTiled from 'pixi-tiledmap';
-
-import Player from './js/player.js';
+import Game from './js/game.js';
 
 import './css/index.css';
-
 import './textures/cat.png';
 import './maps/test-map.tmx';
 import './maps/tiles.png';
-
-let Application = PIXI.Application,
-    loader = PIXI.loader,
-    resources = PIXI.loader.resources,
-    Sprite = PIXI.Sprite;
-let keyboard = require("./js/keyboard.js");
-
 
 // set up the PIXI app fullscreen
 var app = new PIXI.Application(window.innerWidth, window.innerHeight, { antialias: true });
@@ -31,20 +21,11 @@ PIXI.loader
   .add("src/maps/test-map.tmx")
   .load(setup);
 
-let player, tileMap;
+
+// create a game object, initialize it, and set up the game loop
 function setup() {
-  //Create the tilemap
-  tileMap = new PIXI.extras.TiledMap("src/maps/test-map.tmx");
-  app.stage.addChild(tileMap);
+  let game = new Game();
+  game.init(app);
 
-  //Create the player
-  player = new Player(resources["src/textures/cat.png"].texture);
-  tileMap.addChild(player);
-
-  //Start the game loop
-  app.ticker.add(delta => gameLoop(delta));
-}
-
-function gameLoop(delta){
-  player.update(delta, tileMap);
+  app.ticker.add(delta => game.update(delta));
 }
