@@ -1,22 +1,37 @@
 import * as PIXI from 'pixi.js';
 import pixiTiled from 'pixi-tiledmap';
+import Socket from './network.js';
+import NetworkKeyboard from './networkKeyboard.js';
 
 import Player from './player.js';
 
-let player, tileMap;
-
 export default class Game {
     init(app) {
+        //Connect to the websockets
+        this.socket = new Socket();
+
         //Create the tilemap
-        tileMap = new PIXI.extras.TiledMap("src/maps/test-map.tmx");
-        app.stage.addChild(tileMap);
+        this.tileMap = new PIXI.extras.TiledMap("src/maps/test-map.tmx");
+        app.stage.addChild(this.tileMap);
 
         //Create the player
-        player = new Player(PIXI.loader.resources["src/textures/cat.png"].texture);
-        tileMap.addChild(player);
+        this.player = new Player(PIXI.loader.resources["src/textures/cat.png"].texture);
+        this.tileMap.addChild(this.player);
+
+        this.socket.onmessage = (event) => {
+            if (!this.keyboard)
+                this.keyboard = new NetworkKeyboard(this.socket);
+
+            let pos = JSON.parse(event.data);
+            this.player.x = pos.x;
+            this.player.y = pos.y;
+        };
     }
 
     update(delta) {
-        player.update(delta, tileMap);
+        this.player.update(delta, this.tileMap);
+
+        if (this.keyboard)
+            this.keyboard.update();
     }
 }
