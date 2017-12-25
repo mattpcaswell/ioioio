@@ -3,7 +3,7 @@ let sendCounter = 0;
 
 export default class Socket {
     constructor() {
-        this.socket1 = new WebSocket("ws://" + location.host);
+        this.socket1 = new WebSocket("wss://" + location.host);
         // this.socket2 = new WebSocket("ws://" + location.host);
 
         this.socket1.onopen = (event) =>  console.log('socket 1 opened');
