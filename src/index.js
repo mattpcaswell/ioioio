@@ -21,7 +21,6 @@ PIXI.loader
   .add("src/maps/test-map.tmx")
   .load(setup);
 
-
 // create a game object, initialize it, and set up the game loop
 function setup() {
   let game = new Game();
@@ -30,6 +29,3 @@ function setup() {
   app.ticker.add(delta => game.update(delta));
 }
 
-
-// TODO: testing. delete this all
-import './js/network.js';
