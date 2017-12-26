@@ -1,10 +1,12 @@
 let receiveCounter = 0;
 let sendCounter = 0;
 
+let websocketPrefix = PRODUCTION ? "wss://" : "ws://";
+
 export default class Socket {
     constructor(username) {
         // open socket 1
-        this.socket1 = new WebSocket("ws://" + location.host);
+        this.socket1 = new WebSocket(websocketPrefix + location.host);
         this.socket1.onerror = this.socketError;
 
         // once connected, send the username and wait to get the official username back
@@ -16,7 +18,7 @@ export default class Socket {
                // got official username
                this.username = data.username;
 
-               this.socket2 = new WebSocket("ws://" + location.host);
+               this.socket2 = new WebSocket(websocketPrefix + location.host);
                this.socket2.onerror = this.socketError;
                this.socket2.onopen = (event) => {
                    // send it through the second socket too
