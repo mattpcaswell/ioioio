@@ -8,7 +8,7 @@ import Player from './player.js';
 export default class Game {
     init(app) {
         //Connect to the websockets
-        this.socket = new Socket();
+        this.socket = new Socket("Matt");
 
         //Create the tilemap
         this.tileMap = new PIXI.extras.TiledMap("src/maps/test-map.tmx");
@@ -18,11 +18,10 @@ export default class Game {
         this.player = new Player(PIXI.loader.resources["src/textures/cat.png"].texture);
         this.tileMap.addChild(this.player);
 
-        this.socket.onmessage = (event) => {
-            if (!this.keyboard)
-                this.keyboard = new NetworkKeyboard(this.socket);
+        this.socket.connected = () => this.keyboard = new NetworkKeyboard(this.socket);
 
-            let pos = JSON.parse(event.data);
+        this.socket.onmessage = (payload) => {
+            let pos = payload;
             this.player.x = pos.x;
             this.player.y = pos.y;
         };

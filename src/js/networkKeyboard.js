@@ -17,6 +17,6 @@ export default class NetworkKeyboard {
         if (Keyboard.rightKey.isDown)
             pressedKeys.push('right');
 
-        this.socket.send(JSON.stringify(pressedKeys));
+        this.socket.send(pressedKeys);
     }
 }
