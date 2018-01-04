@@ -1,3 +1,5 @@
+"use strict";
+
 // this is the server. It just serves everything statically in the dist folder
 const express = require('express');
 const http = require('http');
@@ -14,5 +16,5 @@ app.use('/', express.static(path.join(__dirname, 'dist')))
 const server = http.createServer(app);
 
 // start the servers
-gameServer(server);
+new gameServer(server);
 server.listen(port, () => console.log('Listening on port ' + port));

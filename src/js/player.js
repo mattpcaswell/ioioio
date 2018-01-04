@@ -13,15 +13,6 @@ class Player extends PIXI.Sprite {
 
     update(delta, tileMap) {
         this.handleKeyboard();
-
-        // this.x += this.vx;
-        // this.y += this.vy
-
-        tileMap.layers.collision.children.map((collisionTile) => {
-            if (containsPoint(collisionTile, this.position)) {
-                console.log('hit');
-            }
-        });
     }
 
     handleKeyboard() {

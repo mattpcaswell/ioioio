@@ -21,7 +21,7 @@ export default class Game {
         this.socket.connected = () => this.keyboard = new NetworkKeyboard(this.socket);
 
         this.socket.onmessage = (payload) => {
-            let pos = payload;
+            let pos = payload[0];
             this.player.x = pos.x;
             this.player.y = pos.y;
         };
