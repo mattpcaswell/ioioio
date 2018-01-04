@@ -46,6 +46,8 @@ class GameSocket {
     onclose(event) {
         // websocket closing. Remove player from the list
         this.gameServer.playerList.removePlayer(this.username);
+        this.gameServer.sendPlayerDisconnected(this.username);
+
         console.log(this.username + " disconnected");
     }
 
@@ -78,11 +80,13 @@ function handleNewConnection(ws, gameServer) {
             // then send back the given username to the user
             ws.send(JSON.stringify({ username: username }));
         } else {
-            // second connection.
+            // second connection. read username and add ws to gameSocket
             let username = message.username;
             let playerIndex = gameServer.playerList.getPlayerWithUsername(username);
             gameServer.playerList.players[playerIndex].gameSocket.ws2 = ws;
 
+            // send new player message to all clients
+            gameServer.sendNewPlayerConnected(username);
             console.log(username + " connected");
         }
 

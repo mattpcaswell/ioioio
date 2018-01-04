@@ -38,7 +38,28 @@ module.exports = class GameServer {
             payload.push(this.playerList.players[i].data);
         }
 
-        socket.send(payload);
+        socket.send({ playerPositions: payload });
+    }
+
+    sendNewPlayerConnected(username) {
+        for(let i = 0; i < this.playerList.players.length; i++) {
+            let player = this.playerList.players[i];
+
+            if (player.data.username !== username) {
+                player.gameSocket.send({connected: username});
+            }
+        }
+    }
+
+    sendPlayerDisconnected(username) {
+        for(let i = 0; i < this.playerList.players.length; i++) {
+            let player = this.playerList.players[i];
+
+            if (player.data.username !== username) {
+                console.log('send player disconnected');
+                player.gameSocket.send({disconnected: username});
+            }
+        }
     }
 
     handleSocketError(error) {

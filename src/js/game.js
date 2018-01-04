@@ -18,12 +18,52 @@ export default class Game {
         this.player = new Player(PIXI.loader.resources["src/textures/cat.png"].texture);
         this.tileMap.addChild(this.player);
 
-        this.socket.connected = () => this.keyboard = new NetworkKeyboard(this.socket);
+        this.playerList = [this.player];
+
+        let firstPlayerPositions;
+        this.socket.connected = () => {
+            this.playerList[0].username = this.socket.username;
+            firstPlayerPositions = true;
+            this.keyboard = new NetworkKeyboard(this.socket);
+        };
 
         this.socket.onmessage = (payload) => {
-            let pos = payload[0];
-            this.player.x = pos.x;
-            this.player.y = pos.y;
+            if (payload.playerPositions) {
+                if (firstPlayerPositions) {
+                    firstPlayerPositions = false;
+                    for (let i = 0; i < payload.playerPositions.length; i++) {
+                        if (payload.playerPositions[i].username !== this.socket.username) {
+                            this.addPlayer(payload.playerPositions[i].username);
+                        }
+                    }
+                }
+
+                for (let i = 0; i < payload.playerPositions.length; i++) {
+                    for (let j = 0; j < this.playerList.length; j++) {
+                        if (this.playerList[j].username === payload.playerPositions[i].username) {
+                            this.playerList[j].x = payload.playerPositions[i].x;
+                            this.playerList[j].y = payload.playerPositions[i].y;
+                        }
+                    }
+                }
+            }
+
+            if (payload.connected) {
+                this.addPlayer(payload.connected);
+                console.log(payload.connected + ' connected');
+            }
+
+            if (payload.disconnected) {
+                console.log('got disconnected message');
+                console.log(this.playerList);
+                for(let i = 0; i < this.playerList.length; i++) {
+                    if (this.playerList[i].username === payload.disconnected) {
+                        this.tileMap.removeChild(this.playerList[i]);
+                        this.playerList.splice(i, 1);
+                        console.log(payload.disconnected + ' disconnected');
+                    }
+                }
+            }
         };
     }
 
@@ -32,5 +72,13 @@ export default class Game {
 
         if (this.keyboard)
             this.keyboard.update();
+    }
+
+    addPlayer(username) {
+        let newPlayer = new Player(PIXI.loader.resources["src/textures/cat.png"].texture);
+        newPlayer.username = username;
+        this.tileMap.addChild(newPlayer);
+
+        this.playerList.push(newPlayer);
     }
 }
